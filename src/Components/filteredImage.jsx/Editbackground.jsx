@@ -74,31 +74,6 @@ function EditBackground() {
     "#ff6f61",
   ];
 
-  useEffect(() => {
-    const savedSettings = JSON.parse(
-      localStorage.getItem("backgroundSettings")
-    );
-    if (savedSettings) {
-      setBackgroundColor(savedSettings.backgroundColor || "#ffffff");
-      setBackgroundImage(savedSettings.backgroundImage || null);
-      setBlur(savedSettings.blur || 0);
-      setZoom(savedSettings.zoom || 1);
-      setImagePosition(savedSettings.imagePosition || { x: 0, y: 0 });
-      setRotation(savedSettings.rotation || 0);
-    }
-  }, []);
-
-  useEffect(() => {
-    const settings = {
-      backgroundColor,
-      backgroundImage,
-      blur,
-      zoom,
-      imagePosition,
-      rotation,
-    };
-    localStorage.setItem("backgroundSettings", JSON.stringify(settings));
-  }, [backgroundColor, backgroundImage, blur, zoom, imagePosition, rotation]);
 
   useEffect(() => {
     drawCanvas();
@@ -300,23 +275,6 @@ function EditBackground() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleSaveSettings = () => {
-    const settings = {
-      backgroundColor,
-      backgroundImage,
-      blur,
-      zoom,
-      imagePosition,
-      rotation,
-    };
-    localStorage.setItem("backgroundSettings", JSON.stringify(settings));
-    setSnackbar({
-      open: true,
-      message: "Settings saved!",
-      severity: "success",
-    });
-  };
 
   const handleResetSettings = () => {
     setBackgroundColor("#ffffff");
@@ -672,14 +630,6 @@ function EditBackground() {
                     aria-labelledby="blur-slider"
                   />
                   <Box display="flex" gap={2}>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={handleSaveSettings}
-                      fullWidth
-                    >
-                      Save Settings
-                    </Button>
                     <Button
                       variant="outlined"
                       color="secondary"
