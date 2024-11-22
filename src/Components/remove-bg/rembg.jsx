@@ -41,7 +41,7 @@ function Removebg() {
 
     try {
       const response = await axios.post(
-        "https://4zlyr2-5000.csb.app/remove-background",
+        "https://v7x4xf-5000.csb.app/remove-background",
         formData,
         { responseType: "blob" }
       );
